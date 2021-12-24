@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES5",
+    "lib": ["DOM", "ES5", "ScriptHost"],
+    "module": "ES2015",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "outDir": "dist/assets/js/",
+    "allowJs": true
+  },
+  "include": ["src/assets/js/*"]
+}
