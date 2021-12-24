@@ -1,6 +1,6 @@
-# Template HTML
+# Template Pug
 
-This repository is templete for HTML development environment.
+This repository is templete for pug development environment.
 
 ## Build
 
@@ -12,9 +12,9 @@ $ npm run build
 
 ## Run locally
 
-Start BrowserSync Server.  
+Start BrowserSync Server.
 Local : [http://localhost:3000/index.html](http://localhost:3000/index.html)
 
 ```shell
-$ npm run watch
+$ npm run start
 ```
