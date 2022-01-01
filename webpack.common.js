@@ -8,14 +8,18 @@ let entries = {};
 const entryFiles = glob.sync(
   `${path.resolve(__dirname, "src")}/assets/js/**.ts`
 );
-entryFiles.forEach((path) => {
+entryFiles.forEach(path => {
   const key = path.match(/([^/]*)\./)[1];
   entries[key] = path;
 });
 
-const htmlFiles = glob.sync(`${path.resolve(__dirname, "src")}/**/**.html`);
-const htmls = htmlFiles.map((path) => {
-  return path.match(/([^/]*)\./)[1];
+const pugFiles = glob.sync(`${path.resolve(__dirname, "src/pug")}/**/**.pug`, {
+  ignore: "**/_*.pug",
+});
+const pugs = pugFiles.map(p => {
+  return p
+    .replace(path.resolve(__dirname, "src/pug") + "/", "")
+    .replace(".pug", "");
 });
 
 module.exports = {
@@ -43,6 +47,17 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.pug$/,
+        use: [
+          {
+            loader: "pug-loader",
+            options: {
+              pretty: true,
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -57,11 +72,11 @@ module.exports = {
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
-    ...htmls.map((filename) => {
+    ...pugs.map(filename => {
       return new HtmlWebpackPlugin({
         inject: false,
         filename: `${filename}.html`,
-        template: `./src/${filename}.html`,
+        template: `./src/pug/${filename}.pug`,
       });
     }),
   ],
